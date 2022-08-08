@@ -60,6 +60,28 @@ public class HoDanDAO implements IHoDanDAO{
     }
     
     @Override
+    public List<HoDanModel> findByMaKhuPho(String maKhuPho) {
+        List<HoDanModel> listHodan = new ArrayList<>();
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "select * from hodan where maKhuPho = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, maKhuPho);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                HoDanModel hoDan = new HoDanModel(resultSet.getString("maHoDan"), 
+                                                  resultSet.getInt("soThanhVien"),
+                                                  resultSet.getString("soNha"),
+                                                  resultSet.getString("maKhuPho"));
+                listHodan.add(hoDan);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return listHodan;
+    }
+    
+    @Override
     public boolean addHoDan(HoDanModel hoDan) {
         boolean rs = false;
         try {

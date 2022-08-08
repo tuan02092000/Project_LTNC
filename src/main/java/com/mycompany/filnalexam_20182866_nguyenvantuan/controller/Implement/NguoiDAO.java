@@ -65,6 +65,30 @@ public class NguoiDAO implements INguoiDAO{
     }
     
     @Override
+    public List<NguoiModel> findByMaHoDan(String maHoDan) {
+        List<NguoiModel> listNguoi = new ArrayList<>();
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "select * from nguoi where maHoDan = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, maHoDan);
+            resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()) {
+                NguoiModel nguoi = new NguoiModel(resultSet.getString("maNguoi"),
+                                                  resultSet.getString("hoVaTen"),
+                                                  resultSet.getInt("tuoi"),
+                                                  resultSet.getInt("namSinh"),
+                                                  resultSet.getString("ngheNghiep"),
+                                                  resultSet.getString("maHoDan"));
+                listNguoi.add(nguoi);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return listNguoi;
+    }
+    
+    @Override
     public boolean addNguoi(NguoiModel nguoi) {
         boolean rs = false;
         try {

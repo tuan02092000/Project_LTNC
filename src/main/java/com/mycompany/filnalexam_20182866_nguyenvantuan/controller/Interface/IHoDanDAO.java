@@ -13,4 +13,5 @@ public interface IHoDanDAO {
     boolean addHoDan(HoDanModel hoDan);
     int getSoThanhVien(String maHoDan);
     void editSoThanhvien(String maHoDan, int soThanhVien);
+    List<HoDanModel> findByMaKhuPho(String maKhuPho);
 }

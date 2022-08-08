@@ -1,8 +1,13 @@
 package com.mycompany.filnalexam_20182866_nguyenvantuan.view;
 
+import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.HoDanDAO;
 import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.KhuPhoDAO;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.NguoiDAO;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.model.HoDanModel;
 import com.mycompany.filnalexam_20182866_nguyenvantuan.model.KhuPhoModel;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.model.NguoiModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -160,6 +165,35 @@ public class KhuPhoFrame extends javax.swing.JFrame {
 
     private void suaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaButtonActionPerformed
         // TODO add your handling code here:
+        
+        KhuPhoDAO kpDAO = new KhuPhoDAO();
+        String maKhuPho = maKhuPhoTextField.getText();
+        KhuPhoModel khuPho = kpDAO.findByID(maKhuPho);
+        if(khuPho != null) {
+            SuaKhuPhoFrame frame = new SuaKhuPhoFrame();
+            frame.maKhuPhoTextField.setText(maKhuPho);
+            frame.tenKhuPhoTextField.setText(khuPho.getTenKhuPho());
+            
+            HoDanDAO hdDAO = new HoDanDAO();
+            List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPho);
+            frame.maHoDanTextField.setText(listHoDan.get(0).getMaHoDan());
+            frame.soNhaTextField.setText(listHoDan.get(0).getSoNha());
+                    
+            NguoiDAO nguoiDAO = new NguoiDAO();
+            List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(listHoDan.get(0).getMaHoDan());
+            frame.maNguoiTextField.setText(listNguoi.get(0).getMaNguoi());
+            frame.hoTenTextField.setText(listNguoi.get(0).getHoVaTen());
+            frame.tuoiTextField.setText(Integer.toString(listNguoi.get(0).getTuoi()));
+            frame.namSinhTextField.setText(Integer.toString(listNguoi.get(0).getNamSinh()));
+            frame.ngheNghiepTextField.setText(listNguoi.get(0).getNgheNghiep());
+            
+            frame.show();
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Mã khu phố không tồn tại");
+        }
+        
+        
     }//GEN-LAST:event_suaButtonActionPerformed
 
     private void xoaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaButtonActionPerformed
