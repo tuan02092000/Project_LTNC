@@ -1,24 +1,45 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.filnalexam_20182866_nguyenvantuan.view;
 
+import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.HoDanDAO;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.KhuPhoDAO;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.NguoiDAO;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.model.HoDanModel;
+import com.mycompany.filnalexam_20182866_nguyenvantuan.model.NguoiModel;
+import static java.util.Collections.list;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author AD
+ * @author Nguyen Van Tuan
  */
 public class SuaKhuPhoFrame extends javax.swing.JFrame {
     DefaultTableModel tableModel;
+    int indexHoDan = 0;
+    int indexNguoi = 0;
     /**
      * Creates new form SuaKhuPhoFrame
      */
     public SuaKhuPhoFrame() {
         initComponents();
     }
+    
+    public void showTable(List<NguoiModel> listNguoi) {
+        tableModel.setRowCount(0);
+        for (NguoiModel nguoi : listNguoi) {
+            tableModel.addRow(new Object[]{
+                nguoi.getMaNguoi(), nguoi.getHoVaTen(), Integer.toString(nguoi.getTuoi()), Integer.toString(nguoi.getNamSinh()), nguoi.getNgheNghiep()
+            });
+        }
+    }
+    
+//    public void clearTable(List<NguoiModel> listNguoi) {
+//        for (int i = 1; i < listNguoi.size(); i++) {
+//            tableModel.remove(i);
+//        }
+//    }
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -68,6 +89,11 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
 
         saveKhuPhoButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         saveKhuPhoButton.setText("Lưu");
+        saveKhuPhoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveKhuPhoButtonActionPerformed(evt);
+            }
+        });
 
         backKhuPhoButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         backKhuPhoButton.setText("Back");
@@ -106,12 +132,27 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
 
         luuNguoiButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         luuNguoiButton.setText("Lưu");
+        luuNguoiButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                luuNguoiButtonActionPerformed(evt);
+            }
+        });
 
         thanhVienTruocButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         thanhVienTruocButton.setText("Thành viên trước");
+        thanhVienTruocButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thanhVienTruocButtonActionPerformed(evt);
+            }
+        });
 
         thanhVienSauButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         thanhVienSauButton.setText("Thành viên sau");
+        thanhVienSauButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thanhVienSauButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,12 +232,27 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
 
         luuHoDanButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         luuHoDanButton.setText("Lưu");
+        luuHoDanButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                luuHoDanButtonActionPerformed(evt);
+            }
+        });
 
         hoDanTruocButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         hoDanTruocButton.setText("Hộ dân trước");
+        hoDanTruocButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hoDanTruocButtonActionPerformed(evt);
+            }
+        });
 
         hoDanSauButton.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         hoDanSauButton.setText("Hộ dân sau");
+        hoDanSauButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                hoDanSauButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -328,6 +384,148 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
         frame.show();
         dispose();
     }//GEN-LAST:event_backKhuPhoButtonActionPerformed
+
+    private void hoDanSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanSauButtonActionPerformed
+        // TODO add your handling code here:
+        HoDanDAO hdDAO = new HoDanDAO();
+        List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
+        indexHoDan++;
+        int soLuongHoDan = listHoDan.size();
+        if(indexHoDan > soLuongHoDan - 1) {
+            indexHoDan = 0;
+        }
+        maHoDanTextField.setText(listHoDan.get(indexHoDan).getMaHoDan());
+        soNhaTextField.setText(listHoDan.get(indexHoDan).getSoNha());  
+        
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
+        maNguoiTextField.setText(listNguoi.get(0).getMaNguoi());
+        hoTenTextField.setText(listNguoi.get(0).getHoVaTen());
+        tuoiTextField.setText(Integer.toString(listNguoi.get(0).getTuoi()));
+        namSinhTextField.setText(Integer.toString(listNguoi.get(0).getNamSinh()));
+        ngheNghiepTextField.setText(listNguoi.get(0).getNgheNghiep());   
+        
+        tableModel = (DefaultTableModel) thanhVienTable.getModel();
+        showTable(listNguoi);
+    }//GEN-LAST:event_hoDanSauButtonActionPerformed
+
+    private void hoDanTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanTruocButtonActionPerformed
+        // TODO add your handling code here:
+        soNhaTextField.setText("");
+        HoDanDAO hdDAO = new HoDanDAO();
+        List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
+        indexHoDan--;
+        int soLuongHoDan = listHoDan.size();
+        if(indexHoDan < 0) {
+            indexHoDan = listHoDan.size() - 1;
+        }
+        maHoDanTextField.setText(listHoDan.get(indexHoDan).getMaHoDan());
+        soNhaTextField.setText(listHoDan.get(indexHoDan).getSoNha());
+        
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
+        maNguoiTextField.setText(listNguoi.get(0).getMaNguoi());
+        hoTenTextField.setText(listNguoi.get(0).getHoVaTen());
+        tuoiTextField.setText(Integer.toString(listNguoi.get(0).getTuoi()));
+        namSinhTextField.setText(Integer.toString(listNguoi.get(0).getNamSinh()));
+        ngheNghiepTextField.setText(listNguoi.get(0).getNgheNghiep()); 
+        
+        tableModel = (DefaultTableModel) thanhVienTable.getModel();
+        showTable(listNguoi);
+    }//GEN-LAST:event_hoDanTruocButtonActionPerformed
+
+    private void thanhVienSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhVienSauButtonActionPerformed
+        // TODO add your handling code here:
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
+        indexNguoi++;
+        int soLuongThanhVien = listNguoi.size();
+        if(indexNguoi > soLuongThanhVien - 1) {
+            indexNguoi = 0;
+        }
+        maNguoiTextField.setText(listNguoi.get(indexNguoi).getMaNguoi());
+        hoTenTextField.setText(listNguoi.get(indexNguoi).getHoVaTen());
+        tuoiTextField.setText(Integer.toString(listNguoi.get(indexNguoi).getTuoi()));
+        namSinhTextField.setText(Integer.toString(listNguoi.get(indexNguoi).getNamSinh()));
+        ngheNghiepTextField.setText(listNguoi.get(indexNguoi).getNgheNghiep()); 
+    }//GEN-LAST:event_thanhVienSauButtonActionPerformed
+
+    private void thanhVienTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhVienTruocButtonActionPerformed
+        // TODO add your handling code here:
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
+        indexNguoi--;
+        int soLuongThanhVien = listNguoi.size();
+        if(indexNguoi < 0) {
+            indexNguoi = soLuongThanhVien - 1;
+        }
+        maNguoiTextField.setText(listNguoi.get(indexNguoi).getMaNguoi());
+        hoTenTextField.setText(listNguoi.get(indexNguoi).getHoVaTen());
+        tuoiTextField.setText(Integer.toString(listNguoi.get(indexNguoi).getTuoi()));
+        namSinhTextField.setText(Integer.toString(listNguoi.get(indexNguoi).getNamSinh()));
+        ngheNghiepTextField.setText(listNguoi.get(indexNguoi).getNgheNghiep());
+    }//GEN-LAST:event_thanhVienTruocButtonActionPerformed
+
+    private void luuHoDanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luuHoDanButtonActionPerformed
+        // TODO add your handling code here:
+        String maHoDan = maHoDanTextField.getText();
+        String soNha = soNhaTextField.getText();
+        
+        HoDanDAO hdDAO = new HoDanDAO();
+        if(hdDAO.editHoDan(maHoDan, soNha)) {
+            JOptionPane.showMessageDialog(rootPane, "Sửa hộ dân thành công");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Sửa hộ dân không thành công");
+        }
+        
+    }//GEN-LAST:event_luuHoDanButtonActionPerformed
+
+    private void luuNguoiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luuNguoiButtonActionPerformed
+        // TODO add your handling code here:
+        String maNguoi = maNguoiTextField.getText();
+        String hoTen = hoTenTextField.getText();
+        int tuoi = Integer.parseInt(tuoiTextField.getText());
+        int namSinh = Integer.parseInt(namSinhTextField.getText());
+        String ngheNghiep = ngheNghiepTextField.getText();
+        String maHoDan = maHoDanTextField.getText();
+        
+        NguoiModel nguoi = new NguoiModel(maNguoi, hoTen, tuoi, namSinh, ngheNghiep, maHoDan);
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        if(nguoiDAO.editNguoi(maNguoi, nguoi)) {
+            JOptionPane.showMessageDialog(rootPane, "Sửa người dân thành công");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Sửa người dân không thành công");
+        }
+    }//GEN-LAST:event_luuNguoiButtonActionPerformed
+
+    private void saveKhuPhoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveKhuPhoButtonActionPerformed
+        // TODO add your handling code here:
+        String maKhuPho = maKhuPhoTextField.getText();
+        String tenKhuPho = tenKhuPhoTextField.getText();
+        String maHoDan = maHoDanTextField.getText();
+        String soNha = soNhaTextField.getText();
+        String maNguoi = maNguoiTextField.getText();
+        String hoTen = hoTenTextField.getText();
+        int tuoi = Integer.parseInt(tuoiTextField.getText());
+        int namSinh = Integer.parseInt(namSinhTextField.getText());
+        String ngheNghiep = ngheNghiepTextField.getText();
+        
+        NguoiModel nguoi = new NguoiModel(maNguoi, hoTen, tuoi, namSinh, ngheNghiep, maKhuPho);
+        
+        KhuPhoDAO kpDAO = new KhuPhoDAO();
+        HoDanDAO hdDAO = new HoDanDAO();
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        
+        kpDAO.editKhuPho(maKhuPho, tenKhuPho);
+        hdDAO.editHoDan(maHoDan, soNha);
+        nguoiDAO.editNguoi(maNguoi, nguoi);
+        
+        JOptionPane.showMessageDialog(rootPane, "Lưu thành công");
+        
+        KhuPhoFrame frame = new KhuPhoFrame();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_saveKhuPhoButtonActionPerformed
 
     /**
      * @param args the command line arguments

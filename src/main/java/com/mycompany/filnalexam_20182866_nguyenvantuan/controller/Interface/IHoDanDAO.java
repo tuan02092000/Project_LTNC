@@ -13,5 +13,6 @@ public interface IHoDanDAO {
     boolean addHoDan(HoDanModel hoDan);
     int getSoThanhVien(String maHoDan);
     void editSoThanhvien(String maHoDan, int soThanhVien);
+    boolean editHoDan(String maHoDan, String soNha);
     List<HoDanModel> findByMaKhuPho(String maKhuPho);
 }

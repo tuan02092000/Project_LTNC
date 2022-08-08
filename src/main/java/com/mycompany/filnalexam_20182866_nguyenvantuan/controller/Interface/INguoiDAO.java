@@ -11,5 +11,6 @@ public interface INguoiDAO {
     List<NguoiModel> findAll();
     NguoiModel findByID(String maNguoi);
     boolean addNguoi(NguoiModel nguoi);
+    boolean editNguoi(String maNguoi, NguoiModel nguoi);
     List<NguoiModel> findByMaHoDan(String maHoDan);
 }

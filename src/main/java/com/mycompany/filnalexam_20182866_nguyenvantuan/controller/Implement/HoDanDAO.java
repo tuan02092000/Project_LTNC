@@ -119,6 +119,23 @@ public class HoDanDAO implements IHoDanDAO{
     }
     
     @Override
+    public boolean editHoDan(String maHoDan, String soNha) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "update hodan set soNha = ? where maHoDan = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, soNha);
+            preparedStatement.setString(2, maHoDan);
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    @Override
     public void editSoThanhvien(String maHoDan, int soThanhVien) {
         try {
             connection = new ConnectDB().getConnection();

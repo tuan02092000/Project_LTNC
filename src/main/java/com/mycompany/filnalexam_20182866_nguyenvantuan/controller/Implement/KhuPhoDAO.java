@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement;
 
 import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Interface.IKhuPhoDAO;
@@ -16,7 +12,7 @@ import java.util.List;
 
 /**
  *
- * @author AD
+ * @author Nguyen Van Tuan
  */
 public class KhuPhoDAO implements IKhuPhoDAO{
     Connection connection = null;
@@ -68,6 +64,23 @@ public class KhuPhoDAO implements IKhuPhoDAO{
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, khuPho.getMaKhuPho());
             preparedStatement.setString(2, khuPho.getTenKhuPho());
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
+    @Override
+    public boolean editKhuPho(String maKhuPho, String tenKhuPho) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "update khupho set tenKhuPho = ? where maKhuPho = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, tenKhuPho);
+            preparedStatement.setString(2, maKhuPho);
             int result = preparedStatement.executeUpdate();
             if(result > 0) rs = true;
         } catch (Exception e) {

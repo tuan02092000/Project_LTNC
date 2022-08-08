@@ -115,6 +115,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveKhuPhoButtonActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="backKhuPhoButton">
       <Properties>
@@ -323,6 +326,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="luuNguoiButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="thanhVienTruocButton">
           <Properties>
@@ -331,6 +337,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xe0;nh vi&#xea;n tr&#x1b0;&#x1edb;c"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="thanhVienTruocButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="thanhVienSauButton">
           <Properties>
@@ -339,6 +348,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Th&#xe0;nh vi&#xea;n sau"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="thanhVienSauButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -446,6 +458,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="L&#x1b0;u"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="luuHoDanButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="hoDanTruocButton">
           <Properties>
@@ -454,6 +469,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="H&#x1ed9; d&#xe2;n tr&#x1b0;&#x1edb;c"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hoDanTruocButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="hoDanSauButton">
           <Properties>
@@ -462,6 +480,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="H&#x1ed9; d&#xe2;n sau"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hoDanSauButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

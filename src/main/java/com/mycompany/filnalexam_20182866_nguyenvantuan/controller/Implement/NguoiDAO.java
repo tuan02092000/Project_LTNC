@@ -109,6 +109,27 @@ public class NguoiDAO implements INguoiDAO{
         return rs;
     }
     
+    @Override
+    public boolean editNguoi(String maNguoi, NguoiModel nguoi) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "update nguoi set hoVaTen = ?, tuoi = ?, namSinh = ?, ngheNghiep = ? where maNguoi = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, nguoi.getHoVaTen());
+            preparedStatement.setInt(2, nguoi.getTuoi());
+            preparedStatement.setInt(3, nguoi.getNamSinh());
+            preparedStatement.setString(4, nguoi.getNgheNghiep());
+            preparedStatement.setString(5, maNguoi);
+            
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
     public static void main(String[] args) {
         NguoiDAO nguoiDAO = new NguoiDAO();
         
