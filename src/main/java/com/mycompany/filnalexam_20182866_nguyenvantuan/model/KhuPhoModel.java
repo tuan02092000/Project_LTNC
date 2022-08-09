@@ -4,6 +4,7 @@ package com.mycompany.filnalexam_20182866_nguyenvantuan.model;
  *
  * @author Nguyen Van Tuan
  */
+
 public class KhuPhoModel {
     String maKhuPho;
     String tenKhuPho;
@@ -39,7 +40,5 @@ public class KhuPhoModel {
     @Override
     public String toString() {
         return "KhuPhoModel{" + "maKhuPho=" + maKhuPho + ", tenKhuPho=" + tenKhuPho + '}';
-    }
-    
-    
+    }    
 }

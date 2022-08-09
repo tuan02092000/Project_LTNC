@@ -9,11 +9,11 @@ import javax.swing.JOptionPane;
  *
  * @author Nguyen Van Tuan
  */
-public class DangNhapFrame extends javax.swing.JFrame {
+public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form LogIn
      */
-    public DangNhapFrame() {
+    public MainFrame() {
         initComponents();
     }
 
@@ -72,7 +72,6 @@ public class DangNhapFrame extends javax.swing.JFrame {
 
         signInBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         signInBtn.setText("Đăng kí");
-        signInBtn.setActionCommand("Đăng kí");
         signInBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signInBtnActionPerformed(evt);
@@ -196,13 +195,13 @@ public class DangNhapFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DangNhapFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DangNhapFrame().setVisible(true);
+                new MainFrame().setVisible(true);
             }
         });
     }

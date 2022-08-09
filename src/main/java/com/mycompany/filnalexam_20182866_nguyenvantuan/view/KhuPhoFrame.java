@@ -318,7 +318,7 @@ public class KhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_xoaKhuPhoMenuActionPerformed
 
     private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed
-        DangNhapFrame frame = new DangNhapFrame();
+        MainFrame frame = new MainFrame();
         frame.show();
         dispose();
     }//GEN-LAST:event_exitMenuActionPerformed
