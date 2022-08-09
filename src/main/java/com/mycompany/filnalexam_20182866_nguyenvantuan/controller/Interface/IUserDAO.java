@@ -8,4 +8,5 @@ import com.mycompany.filnalexam_20182866_nguyenvantuan.model.UserModel;
  */
 public interface IUserDAO {
     UserModel findUser(String userName, String password, int checkBox);
+    boolean addUser(String userName, String password, int checkBox);
 }

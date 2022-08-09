@@ -5,7 +5,6 @@ import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.KhuP
 import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.NguoiDAO;
 import com.mycompany.filnalexam_20182866_nguyenvantuan.model.HoDanModel;
 import com.mycompany.filnalexam_20182866_nguyenvantuan.model.NguoiModel;
-import static java.util.Collections.list;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -373,14 +372,12 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backKhuPhoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backKhuPhoButtonActionPerformed
-        // TODO add your handling code here:
         KhuPhoFrame frame = new KhuPhoFrame();
         frame.show();
         dispose();
     }//GEN-LAST:event_backKhuPhoButtonActionPerformed
 
     private void hoDanSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanSauButtonActionPerformed
-        // TODO add your handling code here:
         HoDanDAO hdDAO = new HoDanDAO();
         List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
         indexHoDan++;
@@ -404,7 +401,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_hoDanSauButtonActionPerformed
 
     private void hoDanTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanTruocButtonActionPerformed
-        // TODO add your handling code here:
         soNhaTextField.setText("");
         HoDanDAO hdDAO = new HoDanDAO();
         List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
@@ -429,7 +425,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_hoDanTruocButtonActionPerformed
 
     private void thanhVienSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhVienSauButtonActionPerformed
-        // TODO add your handling code here:
         NguoiDAO nguoiDAO = new NguoiDAO();
         List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
         indexNguoi++;
@@ -445,7 +440,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_thanhVienSauButtonActionPerformed
 
     private void thanhVienTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhVienTruocButtonActionPerformed
-        // TODO add your handling code here:
         NguoiDAO nguoiDAO = new NguoiDAO();
         List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
         indexNguoi--;
@@ -461,7 +455,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_thanhVienTruocButtonActionPerformed
 
     private void luuHoDanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luuHoDanButtonActionPerformed
-        // TODO add your handling code here:
         String maHoDan = maHoDanTextField.getText();
         String soNha = soNhaTextField.getText();
         
@@ -475,7 +468,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_luuHoDanButtonActionPerformed
 
     private void luuNguoiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_luuNguoiButtonActionPerformed
-        // TODO add your handling code here:
         String maNguoi = maNguoiTextField.getText();
         String hoTen = hoTenTextField.getText();
         int tuoi = Integer.parseInt(tuoiTextField.getText());
@@ -493,7 +485,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_luuNguoiButtonActionPerformed
 
     private void saveKhuPhoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveKhuPhoButtonActionPerformed
-        // TODO add your handling code here:
         String maKhuPho = maKhuPhoTextField.getText();
         String tenKhuPho = tenKhuPhoTextField.getText();
         String maHoDan = maHoDanTextField.getText();

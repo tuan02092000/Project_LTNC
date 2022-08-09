@@ -55,6 +55,16 @@ public class KhuPhoFrame extends javax.swing.JFrame {
         themButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         hienthiTable = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        navigateMenuBar = new javax.swing.JMenu();
+        themKhuPhoMenu = new javax.swing.JMenuItem();
+        suaKhuPhoMenu = new javax.swing.JMenuItem();
+        xoaKhuPhoMenu = new javax.swing.JMenuItem();
+        xemKhuPhoMenu = new javax.swing.JMenuItem();
+        adminMenuBar = new javax.swing.JMenu();
+        thongTinAdminMenu = new javax.swing.JMenuItem();
+        exitMenuBar = new javax.swing.JMenu();
+        exitMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,6 +122,63 @@ public class KhuPhoFrame extends javax.swing.JFrame {
         hienthiTable.setAutoscrolls(false);
         jScrollPane1.setViewportView(hienthiTable);
 
+        navigateMenuBar.setText("Navigate");
+
+        themKhuPhoMenu.setText("Thêm khu phố");
+        themKhuPhoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                themKhuPhoMenuActionPerformed(evt);
+            }
+        });
+        navigateMenuBar.add(themKhuPhoMenu);
+
+        suaKhuPhoMenu.setText("Sửa khu phố");
+        suaKhuPhoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suaKhuPhoMenuActionPerformed(evt);
+            }
+        });
+        navigateMenuBar.add(suaKhuPhoMenu);
+
+        xoaKhuPhoMenu.setText("Xóa khu phố");
+        xoaKhuPhoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xoaKhuPhoMenuActionPerformed(evt);
+            }
+        });
+        navigateMenuBar.add(xoaKhuPhoMenu);
+
+        xemKhuPhoMenu.setText("Xem khu phố");
+        navigateMenuBar.add(xemKhuPhoMenu);
+
+        jMenuBar1.add(navigateMenuBar);
+
+        adminMenuBar.setText("Admin");
+
+        thongTinAdminMenu.setText("Thông tin admin");
+        thongTinAdminMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thongTinAdminMenuActionPerformed(evt);
+            }
+        });
+        adminMenuBar.add(thongTinAdminMenu);
+
+        jMenuBar1.add(adminMenuBar);
+
+        exitMenuBar.setText("Exit");
+
+        exitMenu.setText("exit");
+        exitMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuActionPerformed(evt);
+            }
+        });
+        exitMenuBar.add(exitMenu);
+
+        jMenuBar1.add(exitMenuBar);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,7 +223,7 @@ public class KhuPhoFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lamMoiButton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
                 .addGap(12, 12, 12))
         );
 
@@ -164,8 +231,6 @@ public class KhuPhoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void suaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaButtonActionPerformed
-        // TODO add your handling code here:
-        
         KhuPhoDAO kpDAO = new KhuPhoDAO();
         String maKhuPho = maKhuPhoTextField.getText();
         KhuPhoModel khuPho = kpDAO.findByID(maKhuPho);
@@ -190,21 +255,19 @@ public class KhuPhoFrame extends javax.swing.JFrame {
             frame.show();
             dispose();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Mã khu phố không tồn tại");
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập mã khu phố hoặc mã khu phố không tồn tại");
         }
         
         
     }//GEN-LAST:event_suaButtonActionPerformed
 
     private void xoaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaButtonActionPerformed
-        // TODO add your handling code here:
         XoaKhuPhoFrame frame = new XoaKhuPhoFrame();
         frame.show();
         dispose();
     }//GEN-LAST:event_xoaButtonActionPerformed
 
     private void themButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themButtonActionPerformed
-        // TODO add your handling code here:
         ThemKhuPhoFrame frame = new ThemKhuPhoFrame();
         frame.show();
         dispose();
@@ -212,7 +275,6 @@ public class KhuPhoFrame extends javax.swing.JFrame {
     
     
     private void xemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemButtonActionPerformed
-        // TODO add your handling code here:
         KhuPhoDAO kpDAO = new KhuPhoDAO();
         String maKhuPho = maKhuPhoTextField.getText();
         KhuPhoModel khuPho = kpDAO.findByID(maKhuPho);
@@ -229,13 +291,43 @@ public class KhuPhoFrame extends javax.swing.JFrame {
             frame.show();
             dispose();
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Mã khu phố không tồn tại");
+            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập mã khu phố hoặc mã không tồn tại");
         }
     }//GEN-LAST:event_xemButtonActionPerformed
 
     private void lamMoiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lamMoiButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lamMoiButtonActionPerformed
+
+    private void themKhuPhoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themKhuPhoMenuActionPerformed
+        ThemKhuPhoFrame frame = new ThemKhuPhoFrame();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_themKhuPhoMenuActionPerformed
+
+    private void suaKhuPhoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaKhuPhoMenuActionPerformed
+        SuaKhuPhoFrame frame = new SuaKhuPhoFrame();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_suaKhuPhoMenuActionPerformed
+
+    private void xoaKhuPhoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaKhuPhoMenuActionPerformed
+        XoaKhuPhoFrame  frame = new XoaKhuPhoFrame();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_xoaKhuPhoMenuActionPerformed
+
+    private void exitMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuActionPerformed
+        DangNhapFrame frame = new DangNhapFrame();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_exitMenuActionPerformed
+
+    private void thongTinAdminMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thongTinAdminMenuActionPerformed
+        ThongTinAdmin frame = new ThongTinAdmin();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_thongTinAdminMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,14 +366,24 @@ public class KhuPhoFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu adminMenuBar;
+    private javax.swing.JMenuItem exitMenu;
+    private javax.swing.JMenu exitMenuBar;
     private javax.swing.JTable hienthiTable;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton lamMoiButton;
     private javax.swing.JTextField maKhuPhoTextField;
     private javax.swing.JLabel maKhuPholabel;
+    private javax.swing.JMenu navigateMenuBar;
     private javax.swing.JButton suaButton;
+    private javax.swing.JMenuItem suaKhuPhoMenu;
     private javax.swing.JButton themButton;
+    private javax.swing.JMenuItem themKhuPhoMenu;
+    private javax.swing.JMenuItem thongTinAdminMenu;
     private javax.swing.JButton xemButton;
+    private javax.swing.JMenuItem xemKhuPhoMenu;
     private javax.swing.JButton xoaButton;
+    private javax.swing.JMenuItem xoaKhuPhoMenu;
     // End of variables declaration//GEN-END:variables
 }

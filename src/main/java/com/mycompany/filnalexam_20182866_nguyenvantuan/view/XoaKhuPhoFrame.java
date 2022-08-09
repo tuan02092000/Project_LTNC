@@ -388,14 +388,12 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-        // TODO add your handling code here:
         KhuPhoFrame frame = new KhuPhoFrame();
         frame.show();
         dispose();
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void timKiemKhuPhoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemKhuPhoButtonActionPerformed
-        // TODO add your handling code here:
         String maKhuPho = maKhuPhoTextField.getText();
         if("".equals(maKhuPho)) {
             JOptionPane.showMessageDialog(rootPane, "Bạn cần nhập mã khu phố");
@@ -425,7 +423,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_timKiemKhuPhoButtonActionPerformed
 
     private void hoDanSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanSauButtonActionPerformed
-        // TODO add your handling code here:
         if(!"".equals(maKhuPhoTextField.getText())) {
             HoDanDAO hdDAO = new HoDanDAO();
             List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
@@ -450,7 +447,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_hoDanSauButtonActionPerformed
 
     private void hoDanTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanTruocButtonActionPerformed
-        // TODO add your handling code here:
         if(!"".equals(maKhuPhoTextField.getText())) {
             HoDanDAO hdDAO = new HoDanDAO();
             List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
@@ -475,7 +471,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_hoDanTruocButtonActionPerformed
 
     private void thanhVienSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhVienSauButtonActionPerformed
-        // TODO add your handling code here:
         if(!"".equals(maHoDanTextField.getText())) {
             NguoiDAO nguoiDAO = new NguoiDAO();
             List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
@@ -493,7 +488,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_thanhVienSauButtonActionPerformed
 
     private void thanhVienTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thanhVienTruocButtonActionPerformed
-        // TODO add your handling code here:
         if(!"".equals(maHoDanTextField.getText())) {
             NguoiDAO nguoiDAO = new NguoiDAO();
             List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
@@ -512,7 +506,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_thanhVienTruocButtonActionPerformed
 
     private void xoaNguoiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaNguoiButtonActionPerformed
-        // TODO add your handling code here:
         String maNguoi = maNguoiTextField.getText();
         NguoiDAO nguoiDAO = new NguoiDAO();
         int input = JOptionPane.showConfirmDialog(rootPane, "Bạn có chắc chắn muốn xóa người dân này?");
@@ -551,7 +544,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_timKiemNguoiButtonActionPerformed
 
     private void timKiemHoDanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiemHoDanButtonActionPerformed
-        // TODO add your handling code here:
         String maHoDan = maHoDanTextField.getText();
         HoDanDAO hdDAO = new HoDanDAO();
         HoDanModel hoDan = hdDAO.findByID(maHoDan);
@@ -577,7 +569,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_timKiemHoDanButtonActionPerformed
        
     private void xoaHoDanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaHoDanButtonActionPerformed
-        // TODO add your handling code here:
         String maHoDan = maHoDanTextField.getText();
         HoDanDAO hdDAO = new HoDanDAO();
         int input = JOptionPane.showConfirmDialog(rootPane, "Bạn sẽ xóa hộ dân này và tất cả thành viên trong đó, bạn có chắc chắn không?");
@@ -592,7 +583,6 @@ public class XoaKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_xoaHoDanButtonActionPerformed
 
     private void xoaKhuPhoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaKhuPhoButtonActionPerformed
-        // TODO add your handling code here:
         String maKhuPho = maKhuPhoTextField.getText();
         KhuPhoDAO kpDAO = new KhuPhoDAO();
         int input = JOptionPane.showConfirmDialog(rootPane, "Bạn sẽ xóa khu phố này và tất cả hộ dân và thành viên trong đó, bạn có chắc chắn không?");

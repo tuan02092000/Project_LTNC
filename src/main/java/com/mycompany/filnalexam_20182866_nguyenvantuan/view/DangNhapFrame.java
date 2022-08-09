@@ -34,6 +34,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
         adminCheckbox = new javax.swing.JCheckBox();
         userCheckbox = new javax.swing.JCheckBox();
         loginBtn = new javax.swing.JButton();
+        signInBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,8 +49,18 @@ public class DangNhapFrame extends javax.swing.JFrame {
 
         adminCheckbox.setSelected(true);
         adminCheckbox.setText("Quản trị");
+        adminCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adminCheckboxActionPerformed(evt);
+            }
+        });
 
         userCheckbox.setText("Người dùng");
+        userCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userCheckboxActionPerformed(evt);
+            }
+        });
 
         loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         loginBtn.setText("Đăng nhập");
@@ -59,11 +70,20 @@ public class DangNhapFrame extends javax.swing.JFrame {
             }
         });
 
+        signInBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        signInBtn.setText("Đăng kí");
+        signInBtn.setActionCommand("Đăng kí");
+        signInBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signInBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap(151, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(titleLoginLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -80,7 +100,10 @@ public class DangNhapFrame extends javax.swing.JFrame {
                             .addComponent(usernameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(usernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(signInBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(142, 142, 142))
         );
         layout.setVerticalGroup(
@@ -101,7 +124,9 @@ public class DangNhapFrame extends javax.swing.JFrame {
                     .addComponent(adminCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(userCheckbox, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 44, Short.MAX_VALUE)
+                    .addComponent(signInBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(135, 135, 135))
         );
 
@@ -117,7 +142,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
         UserModel user = login.findUser(userName, passWord, isAdmin);
         
         if (user == null) {
-            JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu không chính xác");
+            JOptionPane.showMessageDialog(rootPane, "Tài khoản hoặc mật khẩu không chính xác, hoặc chưa chọn phân quyền");
         } else {
             JOptionPane.showMessageDialog(rootPane, "Đăng nhập thành công");
             KhuPhoFrame frame2 = new KhuPhoFrame();
@@ -127,6 +152,31 @@ public class DangNhapFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void signInBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signInBtnActionPerformed
+        String userName = usernameTextField.getText();
+        String passWord = passwordTextField.getText();
+        int isAdmin = adminCheckbox.isSelected() ? 1 : 0;
+        
+        UserDAO sigin = new UserDAO();
+        if(sigin.addUser(userName, passWord, isAdmin)) {
+            JOptionPane.showMessageDialog(rootPane, "Đăng kí tài khoản thành công, bạn có thể đăng nhập hệ thống");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Đăng kí tài khoản không thành công, có thể tài khoản đã bị trùng");
+        }
+    }//GEN-LAST:event_signInBtnActionPerformed
+
+    private void adminCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminCheckboxActionPerformed
+        if(adminCheckbox.isSelected()) {
+            userCheckbox.setSelected(false);
+        }
+    }//GEN-LAST:event_adminCheckboxActionPerformed
+
+    private void userCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userCheckboxActionPerformed
+        if(userCheckbox.isSelected()) {
+            adminCheckbox.setSelected(false);
+        }
+    }//GEN-LAST:event_userCheckboxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,6 +212,7 @@ public class DangNhapFrame extends javax.swing.JFrame {
     private javax.swing.JButton loginBtn;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JPasswordField passwordTextField;
+    private javax.swing.JButton signInBtn;
     private javax.swing.JLabel titleLoginLabel;
     private javax.swing.JCheckBox userCheckbox;
     private javax.swing.JLabel usernameLabel;

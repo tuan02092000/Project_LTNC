@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.mycompany.filnalexam_20182866_nguyenvantuan.view;
 
 import com.mycompany.filnalexam_20182866_nguyenvantuan.controller.Implement.HoDanDAO;
@@ -13,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author AD
+ * @author Nguyen Van Tuan
  */
 public class XemKhuPhoFrame extends javax.swing.JFrame {
     DefaultTableModel tableModel;
@@ -205,7 +201,6 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void hoDanTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanTruocButtonActionPerformed
-        // TODO add your handling code here:
         HoDanDAO hdDAO = new HoDanDAO();
         List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
         
@@ -226,7 +221,6 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_hoDanTruocButtonActionPerformed
 
     private void hoDanSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanSauButtonActionPerformed
-        // TODO add your handling code here:
         HoDanDAO hdDAO = new HoDanDAO();
         List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
         
@@ -247,7 +241,6 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_hoDanSauButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
         KhuPhoFrame frame = new KhuPhoFrame();
         frame.show();
         dispose();
