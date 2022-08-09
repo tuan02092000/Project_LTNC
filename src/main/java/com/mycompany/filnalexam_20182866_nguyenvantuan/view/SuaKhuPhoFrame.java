@@ -34,12 +34,6 @@ public class SuaKhuPhoFrame extends javax.swing.JFrame {
         }
     }
     
-//    public void clearTable(List<NguoiModel> listNguoi) {
-//        for (int i = 1; i < listNguoi.size(); i++) {
-//            tableModel.remove(i);
-//        }
-//    }
-    
     
     /**
      * This method is called from within the constructor to initialize the form.

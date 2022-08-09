@@ -6,8 +6,11 @@ import com.mycompany.filnalexam_20182866_nguyenvantuan.model.HoDanModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -149,6 +152,22 @@ public class HoDanDAO implements IHoDanDAO{
         }
     }
     
+    @Override
+    public boolean deleteHoDanByID(String maHoDan) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "delete from hodan where maHodan = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, maHoDan);
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return rs;
+    }
+    
     public static void main(String[] args) {
         HoDanDAO hdDAO = new HoDanDAO();
         
@@ -161,18 +180,24 @@ public class HoDanDAO implements IHoDanDAO{
 //        }
 
         
-        List<HoDanModel> listHoDan = new ArrayList<>();
-        listHoDan = hdDAO.findAll();
-        for(HoDanModel hd : listHoDan) {
-            System.out.println(hd.toString());
+//        List<HoDanModel> listHoDan = new ArrayList<>();
+//        listHoDan = hdDAO.findAll();
+//        for(HoDanModel hd : listHoDan) {
+//            System.out.println(hd.toString());
+//        }
+//        
+//        HoDanModel hoDan = hdDAO.findByID("HD0000");
+//        System.out.println(hoDan.toString());
+//        
+//        hdDAO.editSoThanhvien("HD0002", 3);
+//        
+//        int soTv = hdDAO.getSoThanhVien("HD0002");
+//        System.out.println("So thanh vien: " + soTv);
+
+        if(hdDAO.deleteHoDanByID("HD0020")) {
+            System.out.println("Xoa thanh cong");
+        } else {
+            System.out.println("Xoa khong thanh cong");
         }
-        
-        HoDanModel hoDan = hdDAO.findByID("HD0000");
-        System.out.println(hoDan.toString());
-        
-        hdDAO.editSoThanhvien("HD0002", 3);
-        
-        int soTv = hdDAO.getSoThanhVien("HD0002");
-        System.out.println("So thanh vien: " + soTv);
     }
 }

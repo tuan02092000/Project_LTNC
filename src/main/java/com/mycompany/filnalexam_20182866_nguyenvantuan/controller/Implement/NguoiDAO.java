@@ -130,6 +130,22 @@ public class NguoiDAO implements INguoiDAO{
         return rs;
     }
     
+    @Override
+    public boolean deleteNguoiByID(String maNguoi) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "delete from nguoi where maNguoi = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, maNguoi);
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return rs;
+    }
+    
     public static void main(String[] args) {
         NguoiDAO nguoiDAO = new NguoiDAO();
         
@@ -141,11 +157,17 @@ public class NguoiDAO implements INguoiDAO{
 //            System.out.println("Them nguoi that bai");
 //        }
         
-        List<NguoiModel> listNguoi = nguoiDAO.findAll();
-        for(NguoiModel nguoi: listNguoi) {
-            System.out.println(nguoi.toString());
+//        List<NguoiModel> listNguoi = nguoiDAO.findAll();
+//        for(NguoiModel nguoi: listNguoi) {
+//            System.out.println(nguoi.toString());
+//        }
+//        NguoiModel nguoi = nguoiDAO.findByID("N0000");
+//        System.out.println(nguoi.toString());
+
+        if(nguoiDAO.deleteNguoiByID("N0020")) {
+            System.out.println("Xoa thanh cong");
+        } else {
+            System.out.println("Xoa khong thanh cong");
         }
-        NguoiModel nguoi = nguoiDAO.findByID("N0000");
-        System.out.println(nguoi.toString());
     }
 }

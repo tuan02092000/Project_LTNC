@@ -198,6 +198,9 @@ public class KhuPhoFrame extends javax.swing.JFrame {
 
     private void xoaButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoaButtonActionPerformed
         // TODO add your handling code here:
+        XoaKhuPhoFrame frame = new XoaKhuPhoFrame();
+        frame.show();
+        dispose();
     }//GEN-LAST:event_xoaButtonActionPerformed
 
     private void themButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themButtonActionPerformed
@@ -206,9 +209,28 @@ public class KhuPhoFrame extends javax.swing.JFrame {
         frame.show();
         dispose();
     }//GEN-LAST:event_themButtonActionPerformed
-
+    
+    
     private void xemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xemButtonActionPerformed
         // TODO add your handling code here:
+        KhuPhoDAO kpDAO = new KhuPhoDAO();
+        String maKhuPho = maKhuPhoTextField.getText();
+        KhuPhoModel khuPho = kpDAO.findByID(maKhuPho);
+        if(khuPho != null) {
+            XemKhuPhoFrame frame = new XemKhuPhoFrame();
+            frame.maKhuPhoTextField.setText(khuPho.getMaKhuPho());
+            frame.tenKhuPhoTextField.setText(khuPho.getTenKhuPho());
+                       
+            HoDanDAO hdDAO = new HoDanDAO();
+            List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPho);
+            frame.maHoDanTextField.setText(listHoDan.get(0).getMaHoDan());
+            frame.soNhaTextField.setText(listHoDan.get(0).getSoNha());
+                             
+            frame.show();
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Mã khu phố không tồn tại");
+        }
     }//GEN-LAST:event_xemButtonActionPerformed
 
     private void lamMoiButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lamMoiButtonActionPerformed

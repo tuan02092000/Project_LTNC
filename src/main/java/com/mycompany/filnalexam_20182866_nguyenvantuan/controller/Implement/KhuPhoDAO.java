@@ -89,6 +89,22 @@ public class KhuPhoDAO implements IKhuPhoDAO{
         return rs;
     }
     
+    @Override
+    public boolean deleteKhuPhoByID(String maKhuPho) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "delete from khupho where maKhuPho = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, maKhuPho);
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+    
     public static void main(String[] args) {
         KhuPhoDAO kpDAO = new KhuPhoDAO();
         
@@ -101,14 +117,20 @@ public class KhuPhoDAO implements IKhuPhoDAO{
 //        }
         
         
-        List<KhuPhoModel> listKhuPho = new ArrayList<>();
-        listKhuPho = kpDAO.findAll();
-        for (KhuPhoModel item : listKhuPho){
-            System.out.println(item.toString());
-        }
+//        List<KhuPhoModel> listKhuPho = new ArrayList<>();
+//        listKhuPho = kpDAO.findAll();
+//        for (KhuPhoModel item : listKhuPho){
+//            System.out.println(item.toString());
+//        }
+//        
+//        KhuPhoModel khuPho = new KhuPhoModel();
+//        khuPho = kpDAO.findByID("KP0000");
+//        System.out.println(khuPho.toString());
         
-        KhuPhoModel khuPho = new KhuPhoModel();
-        khuPho = kpDAO.findByID("KP0000");
-        System.out.println(khuPho.toString());      
+        if(kpDAO.deleteKhuPhoByID("KP0009")) {
+            System.out.println("Xoa thanh cong");
+        } else {
+            System.out.println("Xoa khong thanh cong");
+        }
     }
 }
