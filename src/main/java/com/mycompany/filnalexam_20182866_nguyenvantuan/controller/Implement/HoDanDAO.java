@@ -6,11 +6,8 @@ import com.mycompany.filnalexam_20182866_nguyenvantuan.model.HoDanModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -157,7 +154,23 @@ public class HoDanDAO implements IHoDanDAO{
         boolean rs = false;
         try {
             connection = new ConnectDB().getConnection();
-            String sql = "delete from hodan where maHodan = ?";
+            String sql = "delete from hodan where maHoDan = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, maHoDan);
+            int result = preparedStatement.executeUpdate();
+            if(result > 0) rs = true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return rs;
+    }
+    
+    @Override
+    public boolean deleteNguoiByMaHoDan(String maHoDan) {
+        boolean rs = false;
+        try {
+            connection = new ConnectDB().getConnection();
+            String sql = "delete from nguoi where maHoDan = ?";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, maHoDan);
             int result = preparedStatement.executeUpdate();

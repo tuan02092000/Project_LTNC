@@ -14,4 +14,5 @@ public interface IKhuPhoDAO {
     boolean addKhuPho(KhuPhoModel khuPho);
     boolean editKhuPho(String maKhuPho, String tenKhuPho);
     boolean deleteKhuPhoByID(String maKhuPho);
+    boolean deleteHoDanByMaKhuPho(String maKhuPho);
 }

@@ -57,6 +57,7 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
         nguoiTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         maKhuPhoTextField = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,27 +150,36 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
 
         maKhuPhoTextField.setEnabled(false);
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tenKhuPhoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tenKhuPhoTextField)
-                            .addComponent(maKhuPhoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))))
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
                 .addContainerGap(66, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tenKhuPhoLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tenKhuPhoTextField)
+                    .addComponent(maKhuPhoTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -177,7 +187,9 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
-                    .addComponent(maKhuPhoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(maKhuPhoTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(tenKhuPhoLabel)
@@ -194,6 +206,23 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
 
     private void hoDanTruocButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanTruocButtonActionPerformed
         // TODO add your handling code here:
+        HoDanDAO hdDAO = new HoDanDAO();
+        List<HoDanModel> listHoDan = hdDAO.findByMaKhuPho(maKhuPhoTextField.getText());
+        
+        indexHoDan--;
+        int soLuongHoDan = listHoDan.size();
+        if(indexHoDan < 0) {
+            indexHoDan = soLuongHoDan - 1;
+        }
+        
+        maHoDanTextField.setText(listHoDan.get(indexHoDan).getMaHoDan());
+        soNhaTextField.setText(listHoDan.get(indexHoDan).getSoNha());
+        
+        NguoiDAO nguoiDAO = new NguoiDAO();
+        List<NguoiModel> listNguoi = nguoiDAO.findByMaHoDan(maHoDanTextField.getText());
+        
+        tableModel = (DefaultTableModel) nguoiTable.getModel();
+        showTable(listNguoi);
     }//GEN-LAST:event_hoDanTruocButtonActionPerformed
 
     private void hoDanSauButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hoDanSauButtonActionPerformed
@@ -216,6 +245,13 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
         tableModel = (DefaultTableModel) nguoiTable.getModel();
         showTable(listNguoi);       
     }//GEN-LAST:event_hoDanSauButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        KhuPhoFrame frame = new KhuPhoFrame();
+        frame.show();
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,6 +292,7 @@ public class XemKhuPhoFrame extends javax.swing.JFrame {
     private javax.swing.JLabel hoDanLabel;
     private javax.swing.JButton hoDanSauButton;
     private javax.swing.JButton hoDanTruocButton;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

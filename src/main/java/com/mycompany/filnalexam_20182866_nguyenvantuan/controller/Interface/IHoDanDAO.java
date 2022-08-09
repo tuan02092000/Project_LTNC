@@ -16,4 +16,5 @@ public interface IHoDanDAO {
     boolean editHoDan(String maHoDan, String soNha);
     List<HoDanModel> findByMaKhuPho(String maKhuPho);
     boolean deleteHoDanByID(String maHoDan);
+    boolean deleteNguoiByMaHoDan(String maHoDan);
 }
